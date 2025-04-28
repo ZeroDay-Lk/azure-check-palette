@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Info } from 'lucide-react';
+import { Info, CheckCircle2, XCircle } from 'lucide-react';
 
 interface WebCheckCardProps {
   title: string;
@@ -11,6 +11,7 @@ interface WebCheckCardProps {
   icon?: React.ReactNode;
   details?: string[];
   isExpanded?: boolean;
+  value?: string | boolean;
 }
 
 const WebCheckCard = ({
@@ -19,7 +20,8 @@ const WebCheckCard = ({
   status,
   icon,
   details = [],
-  isExpanded = false
+  isExpanded = false,
+  value
 }: WebCheckCardProps) => {
   const [expanded, setExpanded] = React.useState(isExpanded);
 
@@ -38,16 +40,28 @@ const WebCheckCard = ({
     }
   };
 
+  const getStatusIcon = () => {
+    if (typeof value === 'boolean') {
+      return value ? 
+        <CheckCircle2 className="h-4 w-4 text-green-600" /> : 
+        <XCircle className="h-4 w-4 text-red-600" />;
+    }
+    return icon || <Info className="h-4 w-4" />;
+  };
+
   return (
     <Card className="overflow-hidden gradient-border">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className={`p-1.5 rounded-md ${getStatusColor()}`}>
-              {icon || <Info className="h-4 w-4" />}
+              {getStatusIcon()}
             </div>
             <CardTitle className="text-base font-medium">{title}</CardTitle>
           </div>
+          {value && typeof value !== 'boolean' && (
+            <span className="text-sm font-medium text-foreground/70">{value}</span>
+          )}
         </div>
         <CardDescription className="mt-2">{description}</CardDescription>
       </CardHeader>

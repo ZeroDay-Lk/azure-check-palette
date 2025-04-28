@@ -34,14 +34,14 @@ const Index = () => {
         <section className="text-center my-12 md:my-16">
           <div className="inline-block mb-3">
             <Badge variant="outline" className="px-3 py-1 bg-accent text-accent-foreground">
-              Free &amp; Open Source
+              Professional Security Analysis
             </Badge>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-            Comprehensive <span className="text-primary">Website Analysis</span>
+            Advanced <span className="text-primary">Web Security Scanner</span>
           </h1>
           <p className="text-xl text-foreground/80 max-w-2xl mx-auto mb-8">
-            WebCheck provides detailed insights about any domain — security, technology, SEO, and more.
+            Cyber Crew Web Anylacer provides comprehensive security analysis for any domain — including SSL, DNS, headers, and more.
           </p>
           
           <DomainInput />
