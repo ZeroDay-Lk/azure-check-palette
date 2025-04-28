@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { GitHub, Heart } from 'lucide-react';
+import { Github, Heart } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -20,7 +20,7 @@ const Footer = () => {
               className="text-foreground/70 hover:text-primary transition-colors"
               title="View on GitHub"
             >
-              <GitHub size={18} />
+              <Github size={18} />
               <span className="sr-only">GitHub</span>
             </a>
             <span className="text-sm text-foreground/70 flex items-center gap-1">
