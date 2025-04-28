@@ -1,5 +1,5 @@
-
 import React from 'react';
+import '../i18n/config';
 import { Badge } from '@/components/ui/badge';
 import { Shield, Globe, Server, Code, Search, Lock } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -20,7 +20,7 @@ const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode, titl
   </div>
 );
 
-const Index = () => {  
+const Index = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background relative">
       <DigitalBackground />
@@ -43,7 +43,6 @@ const Index = () => {
           <DomainInput />
         </section>
         
-        {/* Data Section */}
         <DataSection />
         
         <section id="features" className="my-16">
