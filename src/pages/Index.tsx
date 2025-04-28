@@ -1,11 +1,12 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Shield, Globe, Server, Code, Search, Lock } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import DomainInput from '@/components/DomainInput';
 import ResultsSection from '@/components/ResultsSection';
+import DataSection from '@/components/DataSection';
 import { Separator } from '@/components/ui/separator';
 import DigitalBackground from '@/components/DigitalBackground';
 
@@ -19,14 +20,7 @@ const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode, titl
   </div>
 );
 
-const Index = () => {
-  const [hasResults, setHasResults] = useState(false);
-  
-  // For demo purposes, show results after a delay
-  setTimeout(() => {
-    setHasResults(true);
-  }, 3000);
-  
+const Index = () => {  
   return (
     <div className="min-h-screen flex flex-col bg-background relative">
       <DigitalBackground />
@@ -49,7 +43,8 @@ const Index = () => {
           <DomainInput />
         </section>
         
-        {hasResults && <ResultsSection />}
+        {/* Data Section */}
+        <DataSection />
         
         <section id="features" className="my-16">
           <div className="text-center mb-10">
@@ -59,7 +54,7 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="feature-grid">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <FeatureCard 
               icon={<Shield className="text-primary h-5 w-5" />} 
               title="Security Analysis" 

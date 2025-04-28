@@ -35,6 +35,36 @@
 
     --radius: 0.5rem;
   }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 13%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 176 89% 35%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 32% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 32% 17%;
+    --accent-foreground: 176 89% 35%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 176 89% 35%;
+  }
 }
 
 @layer base {
@@ -50,7 +80,7 @@
 .gradient-border {
   position: relative;
   border-radius: 0.5rem;
-  background: linear-gradient(white, white) padding-box,
+  background: linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
               linear-gradient(to right, hsl(var(--primary)), hsl(var(--primary)/60%)) border-box;
   border: 1px solid transparent;
 }
