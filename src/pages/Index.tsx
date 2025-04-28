@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import DomainInput from '@/components/DomainInput';
 import ResultsSection from '@/components/ResultsSection';
 import { Separator } from '@/components/ui/separator';
+import DigitalBackground from '@/components/DigitalBackground';
 
 const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => (
   <div className="bg-card rounded-lg p-6 border border-border">
@@ -27,7 +28,8 @@ const Index = () => {
   }, 3000);
   
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-background relative">
+      <DigitalBackground />
       <Navbar />
       
       <main className="flex-1 container mx-auto px-4 pb-12">
