@@ -1,115 +1,121 @@
 
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import React, { useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Info, CheckCircle2, XCircle } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface WebCheckCardProps {
   title: string;
-  description?: string;
-  status: 'good' | 'warning' | 'bad' | 'info' | 'neutral';
+  value: string | boolean | number;
   icon?: React.ReactNode;
+  description?: string;
+  status?: 'good' | 'warning' | 'error' | 'info';
+  isHighlighted?: boolean;
   details?: string[];
   isExpanded?: boolean;
-  value?: string | boolean;
-  isHighlighted?: boolean;
+  customContent?: React.ReactNode;
 }
 
-const WebCheckCard = ({
+const WebCheckCard: React.FC<WebCheckCardProps> = ({
   title,
-  description = '',
-  status,
+  value,
   icon,
+  description,
+  status = 'info',
+  isHighlighted = false,
   details = [],
   isExpanded = false,
-  value,
-  isHighlighted = false
-}: WebCheckCardProps) => {
-  const [expanded, setExpanded] = React.useState(isExpanded);
+  customContent
+}) => {
+  const [expanded, setExpanded] = useState(isExpanded);
+  const { t } = useTranslation();
 
-  const getStatusColor = () => {
-    switch (status) {
-      case 'good':
-        return 'bg-green-100 text-green-600';
-      case 'warning':
-        return 'bg-yellow-100 text-yellow-600';
-      case 'bad':
-        return 'bg-red-100 text-red-600';
-      case 'info':
-        return 'bg-accent text-primary';
-      default:
-        return 'bg-muted text-muted-foreground';
-    }
+  const statusColors = {
+    good: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+    warning: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
+    error: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
+    info: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
   };
 
-  const getStatusIcon = () => {
-    if (typeof value === 'boolean') {
-      return value ? 
-        <CheckCircle2 className="h-4 w-4 text-green-600" /> : 
-        <XCircle className="h-4 w-4 text-red-600" />;
-    }
-    return icon || <Info className="h-4 w-4" />;
-  };
-
-  const renderStatusValue = () => {
-    if (typeof value === 'boolean') {
-      return value ? 
-        <span className="text-green-600 font-medium flex items-center gap-1">
-          <CheckCircle2 className="h-4 w-4" /> {description || 'はい'}
-        </span> : 
-        <span className="text-red-600 font-medium flex items-center gap-1">
-          <XCircle className="h-4 w-4" /> {description || 'いいえ'}
-        </span>;
-    }
-    
-    if (value) {
-      return <span className="font-medium text-foreground">{value}</span>;
-    }
-    
-    return description ? <span className="text-foreground/70">{description}</span> : null;
+  const getBooleanDisplay = (val: boolean) => {
+    return val ? (
+      <Badge variant="outline" className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+        {t('yes')}
+      </Badge>
+    ) : (
+      <Badge variant="outline" className="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">
+        {t('no')}
+      </Badge>
+    );
   };
 
   return (
-    <Card className={`overflow-hidden gradient-border ${isHighlighted ? 'border-red-500 animate-pulse-slow' : ''}`}>
-      <CardHeader className={`pb-3 ${isHighlighted ? 'bg-red-50 dark:bg-red-900/10' : ''}`}>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className={`p-1.5 rounded-md ${getStatusColor()}`}>
-              {getStatusIcon()}
-            </div>
-            <CardTitle className="text-base font-medium">{title}</CardTitle>
+    <Card className={`transition-all ${isHighlighted ? 'animate-pulse-slow border-red-400 dark:border-red-600' : ''}`}>
+      <CardContent className="p-4">
+        <div className="flex justify-between items-start">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            {icon}
+            <span>{title}</span>
           </div>
+
+          {typeof value === 'boolean' ? (
+            getBooleanDisplay(value)
+          ) : (
+            <div className="font-medium">
+              {value}
+            </div>
+          )}
         </div>
-        <CardDescription className="mt-2 flex items-center gap-1">
-          {renderStatusValue()}
-        </CardDescription>
-      </CardHeader>
-      
-      {(details.length > 0) && (
-        <CardContent className={`pt-0 ${!expanded && 'hidden'}`}>
-          <ul className="text-sm space-y-1 text-foreground/80">
-            {details.map((detail, index) => (
-              <li key={index} className="flex gap-2">
-                <span>•</span>
-                <span>{detail}</span>
-              </li>
-            ))}
-          </ul>
-        </CardContent>
-      )}
-      
-      {details.length > 0 && (
-        <div className="px-6 py-2 border-t border-border">
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="text-xs w-full justify-center"
-            onClick={() => setExpanded(!expanded)}
-          >
-            {expanded ? 'Show less' : 'Show more'}
-          </Button>
-        </div>
-      )}
+
+        {description && (
+          <div className={`mt-1 text-sm ${
+            status === 'good' ? 'text-green-600 dark:text-green-400' :
+            status === 'warning' ? 'text-yellow-600 dark:text-yellow-400' :
+            status === 'error' ? 'text-red-600 dark:text-red-400' :
+            'text-blue-600 dark:text-blue-400'
+          }`}>
+            {description}
+          </div>
+        )}
+
+        {customContent && (
+          <div className="mt-3">
+            {customContent}
+          </div>
+        )}
+
+        {details.length > 0 && (
+          <>
+            {expanded && (
+              <div className="mt-3 space-y-1">
+                {details.map((detail, index) => (
+                  <div key={index} className="text-sm text-foreground/80">{detail}</div>
+                ))}
+              </div>
+            )}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="mt-2 w-full flex items-center justify-center text-xs"
+              onClick={() => setExpanded(!expanded)}
+            >
+              {expanded ? (
+                <>
+                  <ChevronUp className="h-3 w-3 mr-1" />
+                  {t('showLess')}
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="h-3 w-3 mr-1" />
+                  {t('showMore')}
+                </>
+              )}
+            </Button>
+          </>
+        )}
+      </CardContent>
     </Card>
   );
 };

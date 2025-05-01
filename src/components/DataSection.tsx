@@ -1,9 +1,9 @@
-
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card } from '@/components/ui/card';
 import { Shield, Globe, Server, Lock, Code, Database, Cookie, Tag, Archive, ExternalLink } from 'lucide-react';
 import WebCheckCard from './WebCheckCard';
+import SecurityScoreChart from './SecurityScoreChart';
 
 const DataSection = () => {
   const { t } = useTranslation();
@@ -429,7 +429,7 @@ const DataSection = () => {
       value: 'ZHNW_8xohgCCrmlUm...',
       status: 'info' as const,
       details: [
-        '目的: ボット対策', 
+        '��的: ボット対策', 
         '有効期限: 30分', 
         'HTTPOnly: はい', 
         'セキュア: はい',
@@ -677,7 +677,8 @@ const DataSection = () => {
         '改善推奨: HTTPセキュリティヘッダーの実装',
         'CSPポリシーの追加が必要'
       ],
-      isExpanded: true
+      isExpanded: true,
+      customContent: <SecurityScoreChart score={78} />
     }
   ];
 
@@ -700,9 +701,12 @@ const DataSection = () => {
       <Card className="p-6">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
           <Shield className="h-5 w-5 text-primary" />
-          セキュリティマトリックス
+          {t('securityMatrix')}
         </h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-1">
+          <div className="flex justify-center items-center py-4">
+            <SecurityScoreChart score={78} />
+          </div>
           {matrixInfo.map((item, index) => (
             <WebCheckCard key={`matrix-${index}`} {...item} />
           ))}
@@ -777,7 +781,7 @@ const DataSection = () => {
       {/* Cookies Section */}
       <Card className="p-6">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-          <Cookie className="h-5 w-5 text-primary" />
+          <Cookie className="h-4 w-4 text-primary" />
           {t('cookies')}
         </h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -790,7 +794,7 @@ const DataSection = () => {
       {/* Social Tags Section */}
       <Card className="p-6">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-          <Tag className="h-5 w-5 text-primary" />
+          <Tag className="h-4 w-4 text-primary" />
           {t('socialTags')}
         </h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -803,7 +807,7 @@ const DataSection = () => {
       {/* Archive History Section */}
       <Card className="p-6">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-          <Archive className="h-5 w-5 text-primary" />
+          <Archive className="h-4 w-4 text-primary" />
           {t('archiveHistory')}
         </h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -816,7 +820,7 @@ const DataSection = () => {
       {/* Redirects Section */}
       <Card className="p-6">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-          <ExternalLink className="h-5 w-5 text-primary" />
+          <ExternalLink className="h-4 w-4 text-primary" />
           {t('redirects')}
         </h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -855,7 +859,7 @@ const DataSection = () => {
       {/* External Tools Section */}
       <Card className="p-6">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-          <ExternalLink className="h-5 w-5 text-primary" />
+          <ExternalLink className="h-4 w-4 text-primary" />
           {t('externalTools')}
         </h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
