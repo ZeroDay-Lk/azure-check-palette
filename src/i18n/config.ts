@@ -40,7 +40,12 @@ i18n.use(initReactI18next).init({
         noThreatsFound: '脅威は見つかりませんでした',
         initialSize: '初期サイズ',
         co2Load: 'CO2負荷',
-        energyUsage: 'エネルギー使用量'
+        energyUsage: 'エネルギー使用量',
+        cookies: 'クッキー',
+        socialTags: 'ソーシャルタグ',
+        archiveHistory: 'アーカイブ履歴',
+        redirects: 'リダイレクト',
+        externalTools: '外部ツール'
       }
     }
   },

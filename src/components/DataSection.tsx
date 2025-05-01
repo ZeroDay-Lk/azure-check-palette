@@ -2,8 +2,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Shield, Globe, Server, Lock } from 'lucide-react';
+import { Shield, Globe, Server, Lock, Code, Database } from 'lucide-react';
 import WebCheckCard from './WebCheckCard';
 
 const DataSection = () => {
@@ -14,6 +13,11 @@ const DataSection = () => {
       title: t('location'),
       value: 'M4M, Toronto, Ontario, Canada',
       icon: <Globe className="h-4 w-4" />,
+      status: 'info' as const
+    },
+    {
+      title: t('country'),
+      value: 'Canada',
       status: 'info' as const
     },
     {
@@ -59,6 +63,16 @@ const DataSection = () => {
       title: t('expires'),
       value: '28 June 2025',
       status: 'info' as const
+    },
+    {
+      title: t('renewed'),
+      value: '30 March 2025',
+      status: 'info' as const
+    },
+    {
+      title: t('fingerprint'),
+      value: '32:39:25:8A:70:D7:1D',
+      status: 'info' as const
     }
   ];
 
@@ -87,6 +101,7 @@ const DataSection = () => {
       title: 'Content Security Policy',
       value: false,
       icon: <Shield className="h-4 w-4" />,
+      description: t('no'),
       status: 'warning' as const
     },
     {
@@ -103,49 +118,160 @@ const DataSection = () => {
     }
   ];
 
+  const dnsRecords = [
+    {
+      title: 'A Records',
+      value: '104.21.112.1, 104.21.96.1',
+      icon: <Database className="h-4 w-4" />,
+      status: 'info' as const
+    },
+    {
+      title: 'AAAA Records',
+      value: '2606:4700:3030::68',
+      status: 'info' as const
+    },
+    {
+      title: 'NS Records',
+      value: 'gene.ns.cloudflare, aaden.ns.cloudflare',
+      status: 'info' as const
+    }
+  ];
+
+  const headers = [
+    {
+      title: 'Content-Type',
+      value: '1 August 2001',
+      icon: <Code className="h-4 w-4" />,
+      status: 'info' as const
+    },
+    {
+      title: 'Transfer-Encoding',
+      value: 'chunked',
+      status: 'info' as const
+    },
+    {
+      title: 'Connection',
+      value: 'keep-alive',
+      status: 'info' as const
+    },
+    {
+      title: 'X-Powered-By',
+      value: 'Next.js',
+      status: 'info' as const
+    }
+  ];
+
+  const carbonFootprint = [
+    {
+      title: t('initialSize'),
+      value: '2.265 bytes',
+      status: 'info' as const
+    },
+    {
+      title: t('co2Load'),
+      value: '0.0007552 grams',
+      status: 'info' as const
+    },
+    {
+      title: t('energyUsage'),
+      value: '0.000001709 KMg',
+      status: 'info' as const
+    }
+  ];
+
   return (
-    <Card className="mt-8 p-6">
-      <Tabs defaultValue="general" className="w-full">
-        <TabsList className="mb-6">
-          <TabsTrigger value="general">{t('generalInfo')}</TabsTrigger>
-          <TabsTrigger value="ssl">{t('sslCertificate')}</TabsTrigger>
-          <TabsTrigger value="security">{t('security')}</TabsTrigger>
-          <TabsTrigger value="server">{t('serverInfo')}</TabsTrigger>
-        </TabsList>
+    <div className="mt-8 grid grid-cols-1 gap-6">
+      {/* General Information Section */}
+      <Card className="p-6">
+        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+          <Globe className="h-5 w-5 text-primary" />
+          {t('generalInfo')}
+        </h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {generalInfo.map((item, index) => (
+            <WebCheckCard key={`general-${index}`} {...item} />
+          ))}
+        </div>
+      </Card>
 
-        <TabsContent value="general" className="mt-0">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {generalInfo.map((item, index) => (
-              <WebCheckCard key={`general-${index}`} {...item} />
-            ))}
-          </div>
-        </TabsContent>
+      {/* SSL Certificate Section */}
+      <Card className="p-6">
+        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+          <Lock className="h-5 w-5 text-primary" />
+          {t('sslCertificate')}
+        </h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {sslInfo.map((item, index) => (
+            <WebCheckCard key={`ssl-${index}`} {...item} />
+          ))}
+        </div>
+      </Card>
 
-        <TabsContent value="ssl" className="mt-0">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {sslInfo.map((item, index) => (
-              <WebCheckCard key={`ssl-${index}`} {...item} />
-            ))}
-          </div>
-        </TabsContent>
+      {/* Headers Section */}
+      <Card className="p-6">
+        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+          <Code className="h-5 w-5 text-primary" />
+          {t('headers')}
+        </h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {headers.map((item, index) => (
+            <WebCheckCard key={`headers-${index}`} {...item} />
+          ))}
+        </div>
+      </Card>
 
-        <TabsContent value="security" className="mt-0">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {securityInfo.map((item, index) => (
-              <WebCheckCard key={`security-${index}`} {...item} />
-            ))}
-          </div>
-        </TabsContent>
+      {/* DNS Records Section */}
+      <Card className="p-6">
+        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+          <Database className="h-5 w-5 text-primary" />
+          {t('dnsRecords')}
+        </h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {dnsRecords.map((item, index) => (
+            <WebCheckCard key={`dns-${index}`} {...item} />
+          ))}
+        </div>
+      </Card>
 
-        <TabsContent value="server" className="mt-0">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {serverInfo.map((item, index) => (
-              <WebCheckCard key={`server-${index}`} {...item} />
-            ))}
-          </div>
-        </TabsContent>
-      </Tabs>
-    </Card>
+      {/* Security Section */}
+      <Card className="p-6">
+        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+          <Shield className="h-5 w-5 text-primary" />
+          {t('security')}
+        </h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {securityInfo.map((item, index) => (
+            <WebCheckCard key={`security-${index}`} {...item} />
+          ))}
+        </div>
+      </Card>
+
+      {/* Server Info Section */}
+      <Card className="p-6">
+        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+          <Server className="h-5 w-5 text-primary" />
+          {t('serverInfo')}
+        </h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {serverInfo.map((item, index) => (
+            <WebCheckCard key={`server-${index}`} {...item} />
+          ))}
+        </div>
+      </Card>
+
+      {/* Carbon Footprint Section */}
+      <Card className="p-6">
+        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+          <Shield className="h-5 w-5 text-primary" />
+          {t('carbonFootprint')}
+        </h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {carbonFootprint.map((item, index) => (
+            <WebCheckCard key={`carbon-${index}`} {...item} />
+          ))}
+        </div>
+      </Card>
+    </div>
   );
 };
 

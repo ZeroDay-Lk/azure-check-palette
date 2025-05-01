@@ -6,7 +6,7 @@ import { Info, CheckCircle2, XCircle } from 'lucide-react';
 
 interface WebCheckCardProps {
   title: string;
-  description: string;
+  description?: string; // Make description optional
   status: 'good' | 'warning' | 'bad' | 'info' | 'neutral';
   icon?: React.ReactNode;
   details?: string[];
@@ -16,7 +16,7 @@ interface WebCheckCardProps {
 
 const WebCheckCard = ({
   title,
-  description,
+  description = '', // Provide default empty string
   status,
   icon,
   details = [],
@@ -63,7 +63,7 @@ const WebCheckCard = ({
             <span className="text-sm font-medium text-foreground/70">{value}</span>
           )}
         </div>
-        <CardDescription className="mt-2">{description}</CardDescription>
+        {description && <CardDescription className="mt-2">{description}</CardDescription>}
       </CardHeader>
       {(expanded && details.length > 0) && (
         <CardContent className="pt-0">
