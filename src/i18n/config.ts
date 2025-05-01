@@ -69,7 +69,15 @@ i18n.use(initReactI18next).init({
         xXssProtection: 'XSS保護',
         hstsCheck: 'HSTS確認',
         dnssec: 'DNSSEC',
-        securityTxt: 'security.txt'
+        securityTxt: 'security.txt',
+        securityScore: 'セキュリティスコア',
+        securityMatrix: 'セキュリティマトリックス',
+        showMore: '詳細を表示',
+        showLess: '詳細を隠す',
+        noData: 'データなし',
+        home: 'ホーム',
+        features: '機能',
+        about: '概要'
       }
     }
   },

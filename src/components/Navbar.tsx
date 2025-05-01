@@ -9,10 +9,11 @@ const Navbar = () => {
     <div className="border-b border-border">
       <div className="container flex items-center justify-between py-3 mx-auto">
         <Link to="/" className="flex items-center space-x-2">
-          <div className="bg-primary p-1.5 rounded text-primary-foreground">
-            <Shield className="h-5 w-5" />
-          </div>
-          <span className="font-semibold text-lg">Cyber Crew Web Anylacer</span>
+          <img 
+            src="/lovable-uploads/53a58401-d16e-45e5-8b7e-2255a2b084a6.png" 
+            alt="Cyber Crew Logo" 
+            className="h-9" 
+          />
         </Link>
         
         <div className="flex items-center space-x-4">

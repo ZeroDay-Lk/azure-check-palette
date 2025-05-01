@@ -6,22 +6,24 @@ import { Info, CheckCircle2, XCircle } from 'lucide-react';
 
 interface WebCheckCardProps {
   title: string;
-  description?: string; // Make description optional
+  description?: string;
   status: 'good' | 'warning' | 'bad' | 'info' | 'neutral';
   icon?: React.ReactNode;
   details?: string[];
   isExpanded?: boolean;
   value?: string | boolean;
+  isHighlighted?: boolean;
 }
 
 const WebCheckCard = ({
   title,
-  description = '', // Provide default empty string
+  description = '',
   status,
   icon,
   details = [],
   isExpanded = false,
-  value
+  value,
+  isHighlighted = false
 }: WebCheckCardProps) => {
   const [expanded, setExpanded] = React.useState(isExpanded);
 
@@ -68,8 +70,8 @@ const WebCheckCard = ({
   };
 
   return (
-    <Card className="overflow-hidden gradient-border">
-      <CardHeader className="pb-3">
+    <Card className={`overflow-hidden gradient-border ${isHighlighted ? 'border-red-500 animate-pulse-slow' : ''}`}>
+      <CardHeader className={`pb-3 ${isHighlighted ? 'bg-red-50 dark:bg-red-900/10' : ''}`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className={`p-1.5 rounded-md ${getStatusColor()}`}>
