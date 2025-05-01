@@ -49,6 +49,24 @@ const WebCheckCard = ({
     return icon || <Info className="h-4 w-4" />;
   };
 
+  const renderStatusValue = () => {
+    if (typeof value === 'boolean') {
+      return value ? 
+        <span className="text-green-600 font-medium flex items-center gap-1">
+          <CheckCircle2 className="h-4 w-4" /> {description || 'はい'}
+        </span> : 
+        <span className="text-red-600 font-medium flex items-center gap-1">
+          <XCircle className="h-4 w-4" /> {description || 'いいえ'}
+        </span>;
+    }
+    
+    if (value) {
+      return <span className="font-medium text-foreground">{value}</span>;
+    }
+    
+    return description ? <span className="text-foreground/70">{description}</span> : null;
+  };
+
   return (
     <Card className="overflow-hidden gradient-border">
       <CardHeader className="pb-3">
@@ -59,14 +77,14 @@ const WebCheckCard = ({
             </div>
             <CardTitle className="text-base font-medium">{title}</CardTitle>
           </div>
-          {value && typeof value !== 'boolean' && (
-            <span className="text-sm font-medium text-foreground/70">{value}</span>
-          )}
         </div>
-        {description && <CardDescription className="mt-2">{description}</CardDescription>}
+        <CardDescription className="mt-2 flex items-center gap-1">
+          {renderStatusValue()}
+        </CardDescription>
       </CardHeader>
-      {(expanded && details.length > 0) && (
-        <CardContent className="pt-0">
+      
+      {(details.length > 0) && (
+        <CardContent className={`pt-0 ${!expanded && 'hidden'}`}>
           <ul className="text-sm space-y-1 text-foreground/80">
             {details.map((detail, index) => (
               <li key={index} className="flex gap-2">
@@ -77,6 +95,7 @@ const WebCheckCard = ({
           </ul>
         </CardContent>
       )}
+      
       {details.length > 0 && (
         <div className="px-6 py-2 border-t border-border">
           <Button 
