@@ -12,21 +12,20 @@ const Navbar = () => {
           <img 
             src="/lovable-uploads/53a58401-d16e-45e5-8b7e-2255a2b084a6.png" 
             alt="Cyber Crew Logo" 
-            className="h-10" 
+            className="h-9" 
           />
-          <span className="font-bold text-xl">サイバークルー</span>
         </Link>
         
         <div className="flex items-center space-x-4">
           <nav className="hidden md:flex items-center space-x-4">
             <Link to="/" className="text-sm font-medium transition hover:text-primary">
-              ホーム
+              Home
             </Link>
             <Link to="#features" className="text-sm font-medium transition hover:text-primary">
-              機能
+              Features
             </Link>
             <Link to="#about" className="text-sm font-medium transition hover:text-primary">
-              概要
+              About
             </Link>
           </nav>
           

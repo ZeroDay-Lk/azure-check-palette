@@ -77,8 +77,7 @@ i18n.use(initReactI18next).init({
         noData: 'データなし',
         home: 'ホーム',
         features: '機能',
-        about: '概要',
-        securityScoreText: 'セキュリティスコア'
+        about: '概要'
       }
     }
   },

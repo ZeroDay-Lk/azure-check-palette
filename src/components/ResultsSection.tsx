@@ -10,28 +10,24 @@ const ResultsSection = () => {
   const securityResults = [
     {
       title: 'SSL Certificate',
-      value: 'Valid',
       description: 'Valid SSL certificate detected, expires in 120 days',
       status: 'good' as const,
       icon: <Lock className="h-4 w-4" />,
       details: [
         'Issued by: Let\'s Encrypt',
         'Valid until: June 28, 2025',
-        'Encryption: RSA 2048-bit',
-        'Certificate is properly configured'
+        'Encryption: RSA 2048-bit'
       ]
     },
     {
       title: 'HTTPS Redirect',
-      value: true,
       description: 'All traffic is redirected to HTTPS',
       status: 'good' as const,
       icon: <Shield className="h-4 w-4" />,
       details: [
         'Status code: 301',
         'HTTP to HTTPS redirection confirmed',
-        'HSTS header detected',
-        'Preload status: Enabled'
+        'HSTS header detected'
       ]
     }
   ];
@@ -39,28 +35,24 @@ const ResultsSection = () => {
   const serverResults = [
     {
       title: 'Server Information',
-      value: 'Nginx',
       description: 'Running Nginx 1.20.1 on Ubuntu',
       status: 'info' as const,
       icon: <Server className="h-4 w-4" />,
       details: [
         'Server: Nginx 1.20.1',
         'OS: Ubuntu 20.04 LTS',
-        'IP: 123.456.789.0',
-        'Last updated: 2023-05-15'
+        'IP: 123.456.789.0'
       ]
     },
     {
       title: 'DNS Records',
-      value: '5',
       description: '5 DNS records found',
       status: 'info' as const,
       icon: <Globe className="h-4 w-4" />,
       details: [
         'A: 123.456.789.0',
         'MX: mail.example.com',
-        'TXT: v=spf1 include:_spf.example.com ~all',
-        'CNAME: www.example.com'
+        'TXT: v=spf1 include:_spf.example.com ~all'
       ]
     }
   ];
@@ -68,28 +60,24 @@ const ResultsSection = () => {
   const techResults = [
     {
       title: 'Technologies',
-      value: 'React',
       description: 'React, Tailwind CSS, Node.js',
       status: 'info' as const,
       icon: <Code className="h-4 w-4" />,
       details: [
         'Frontend: React 18.0.0',
         'CSS: Tailwind CSS 3.3.0',
-        'Backend: Node.js 16.14.0',
-        'Database: MongoDB 5.0.6'
+        'Backend: Node.js 16.14.0'
       ]
     },
     {
       title: 'Performance',
-      value: '92/100',
       description: 'Lighthouse score: 92/100',
       status: 'good' as const,
       icon: <Calendar className="h-4 w-4" />,
       details: [
         'First Contentful Paint: 0.8s',
         'Time to Interactive: 1.2s',
-        'Speed Index: 1.0s',
-        'Total Blocking Time: 0.15s'
+        'Speed Index: 1.0s'
       ]
     }
   ];
