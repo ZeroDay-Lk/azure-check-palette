@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Info, CheckCircle2, XCircle } from 'lucide-react';
+import { Info, CheckCircle2, XCircle, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface WebCheckCardProps {
   title: string;
@@ -69,6 +69,10 @@ const WebCheckCard = ({
     return description ? <span className="text-foreground/70">{description}</span> : null;
   };
 
+  // Display first 4 details when not expanded, all when expanded
+  const visibleDetails = expanded ? details : details.slice(0, 4);
+  const hasMoreDetails = details.length > 4;
+
   return (
     <Card className={`overflow-hidden gradient-border ${isHighlighted ? 'border-red-500 animate-pulse-slow' : ''}`}>
       <CardHeader className={`pb-3 ${isHighlighted ? 'bg-red-50 dark:bg-red-900/10' : ''}`}>
@@ -85,10 +89,10 @@ const WebCheckCard = ({
         </CardDescription>
       </CardHeader>
       
-      {(details.length > 0) && (
-        <CardContent className={`pt-0 ${!expanded && 'hidden'}`}>
+      {(visibleDetails.length > 0) && (
+        <CardContent className="pt-0">
           <ul className="text-sm space-y-1 text-foreground/80">
-            {details.map((detail, index) => (
+            {visibleDetails.map((detail, index) => (
               <li key={index} className="flex gap-2">
                 <span>•</span>
                 <span>{detail}</span>
@@ -98,15 +102,23 @@ const WebCheckCard = ({
         </CardContent>
       )}
       
-      {details.length > 0 && (
+      {hasMoreDetails && (
         <div className="px-6 py-2 border-t border-border">
           <Button 
             variant="ghost" 
             size="sm" 
-            className="text-xs w-full justify-center"
+            className="text-xs w-full justify-center flex items-center gap-1"
             onClick={() => setExpanded(!expanded)}
           >
-            {expanded ? 'Show less' : 'Show more'}
+            {expanded ? (
+              <>
+                Show less <ChevronUp className="h-3 w-3" />
+              </>
+            ) : (
+              <>
+                Show more <ChevronDown className="h-3 w-3" />
+              </>
+            )}
           </Button>
         </div>
       )}
