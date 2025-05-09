@@ -22,7 +22,7 @@ const DigitalBackground = () => {
     window.addEventListener('resize', resizeCanvas);
 
     // Digital rain parameters - increased density and speed
-    const fontSize = 16; // Larger font size
+    const fontSize = 18; // Even larger font size for better visibility
     const columns = canvas.width / fontSize;
     const drops: number[] = Array(Math.floor(columns)).fill(1);
     
@@ -33,13 +33,9 @@ const DigitalBackground = () => {
     function draw() {
       // Background fade effect (decreased opacity for more visible trails)
       ctx.fillStyle = theme === 'dark' 
-        ? 'rgba(5, 10, 15, 0.05)' // More transparent for longer trails
-        : 'rgba(0, 0, 0, 0.03)';
+        ? 'rgba(5, 10, 15, 0.03)' // More transparent for longer trails
+        : 'rgba(0, 0, 0, 0.02)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Character color (brighter neon green for better visibility)
-      ctx.fillStyle = theme === 'dark' ? '#00FF9F' : '#0ABAB5';
-      ctx.font = `bold ${fontSize}px monospace`; // Bold for better visibility
 
       // Draw each drop with enhanced matrix effect
       drops.forEach((y, i) => {
@@ -47,15 +43,15 @@ const DigitalBackground = () => {
         const char = chars[Math.floor(Math.random() * chars.length)];
         
         // Vary the character opacity for depth effect
-        ctx.globalAlpha = y > 5 ? 0.8 - Math.random() * 0.3 : 1;
+        ctx.globalAlpha = y > 5 ? 0.9 - Math.random() * 0.2 : 1; // Increased opacity
         
         // Random brightness for some characters (flashing effect)
         if (Math.random() > 0.95) {
           ctx.fillStyle = '#FFFFFF'; // Bright white for emphasis
         } else {
-          // Gradient colors for more cyber feel
+          // Gradient colors for more cyber feel with brighter colors
           const colors = theme === 'dark' 
-            ? ['#00FF9F', '#0FFFBF', '#00FFFF', '#00FF66'] 
+            ? ['#00FF9F', '#0FFFBF', '#00FFFF', '#33FF66'] 
             : ['#0ABAB5', '#0DADA8', '#0F9F9C', '#0C8C8A'];
           ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
         }
@@ -85,17 +81,17 @@ const DigitalBackground = () => {
     const glitchInterval = setInterval(() => {
       if (Math.random() > 0.6) { // Increased frequency of glitches
         // Horizontal line glitch
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.25)'; // More visible glitches
         ctx.fillRect(
           0,
           Math.random() * canvas.height,
           canvas.width,
-          Math.random() * 3 + 1
+          Math.random() * 5 + 2 // Thicker lines
         );
         
         // Block glitch
         if (Math.random() > 0.8) {
-          ctx.fillStyle = theme === 'dark' ? 'rgba(0, 255, 159, 0.1)' : 'rgba(10, 186, 181, 0.1)';
+          ctx.fillStyle = theme === 'dark' ? 'rgba(0, 255, 159, 0.2)' : 'rgba(10, 186, 181, 0.15)';
           ctx.fillRect(
             Math.random() * canvas.width,
             Math.random() * canvas.height,
@@ -104,15 +100,15 @@ const DigitalBackground = () => {
           );
         }
       }
-    }, 1000); // More frequent glitches
+    }, 800); // More frequent glitches
 
     // Add scanning line effect
     const scanLineInterval = setInterval(() => {
-      ctx.fillStyle = theme === 'dark' ? 'rgba(0, 255, 159, 0.1)' : 'rgba(10, 186, 181, 0.1)';
+      ctx.fillStyle = theme === 'dark' ? 'rgba(0, 255, 159, 0.2)' : 'rgba(10, 186, 181, 0.2)';
       let scanPosition = 0;
       
       const scanLine = () => {
-        ctx.fillRect(0, scanPosition, canvas.width, 2);
+        ctx.fillRect(0, scanPosition, canvas.width, 3); // Thicker scan line
         scanPosition += 5;
         
         if (scanPosition < canvas.height) {
@@ -121,7 +117,7 @@ const DigitalBackground = () => {
       };
       
       scanLine();
-    }, 5000);
+    }, 3000); // More frequent scan lines
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
@@ -135,10 +131,10 @@ const DigitalBackground = () => {
     <>
       <canvas
         ref={canvasRef}
-        className={`fixed top-0 left-0 w-full h-full -z-10 ${theme === 'dark' ? 'opacity-50' : 'opacity-30'}`}
+        className={`fixed top-0 left-0 w-full h-full -z-10 ${theme === 'dark' ? 'opacity-80' : 'opacity-60'}`}
         style={{ 
-          filter: 'blur(0.5px)',
-          WebkitFilter: 'blur(0.5px)', 
+          filter: 'blur(0px)', // Removed blur for sharper characters
+          WebkitFilter: 'blur(0px)', 
         }}
       />
       <div className="digital-background-container fixed inset-0 -z-20" />
