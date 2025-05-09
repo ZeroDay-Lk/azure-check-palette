@@ -83,7 +83,7 @@ const ResultsSection = () => {
   ];
 
   return (
-    <Card className="border border-border p-6 mt-8">
+    <Card className="border border-border p-6 mt-8 relative z-30">
       <Tabs defaultValue="security" className="w-full">
         <TabsList className="mb-6 bg-muted">
           <TabsTrigger value="security">Security</TabsTrigger>

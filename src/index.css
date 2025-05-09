@@ -74,6 +74,9 @@
 
   body {
     @apply bg-background text-foreground;
+    position: relative;
+    z-index: 0;
+    overflow-x: hidden;
   }
 }
 
@@ -152,7 +155,12 @@
     transparent 21px
   );
   pointer-events: none;
-  z-index: -1;
+}
+
+/* Content wrapper */
+.content-wrapper {
+  position: relative;
+  pointer-events: auto;
 }
 
 /* Animated pulse for dangerous elements */
@@ -200,5 +208,4 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: -1;
 }

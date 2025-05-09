@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -90,7 +89,7 @@ const WebCheckCard = ({
   }, [isHighlighted, title]);
 
   return (
-    <Card className={`overflow-hidden cyber-card relative ${isHighlighted ? 'border-red-500 animate-pulse-slow' : ''}`}>
+    <Card className={`overflow-hidden cyber-card relative z-30 ${isHighlighted ? 'border-red-500 animate-pulse-slow' : ''}`}>
       {isHighlighted && (
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
           {Array.from({ length: 12 }).map((_, i) => (

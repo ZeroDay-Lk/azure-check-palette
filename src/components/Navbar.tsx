@@ -6,7 +6,7 @@ import { Shield } from 'lucide-react';
 
 const Navbar = () => {
   return (
-    <div className="border-b border-border">
+    <div className="border-b border-border relative z-40">
       <div className="container flex items-center justify-between py-3 mx-auto">
         <Link to="/" className="flex items-center space-x-2">
           <img 

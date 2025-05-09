@@ -131,13 +131,13 @@ const DigitalBackground = () => {
     <>
       <canvas
         ref={canvasRef}
-        className={`fixed top-0 left-0 w-full h-full -z-10 ${theme === 'dark' ? 'opacity-80' : 'opacity-60'}`}
+        className={`fixed top-0 left-0 w-full h-full z-20 pointer-events-none ${theme === 'dark' ? 'opacity-80' : 'opacity-70'}`}
         style={{ 
           filter: 'blur(0px)', // Removed blur for sharper characters
           WebkitFilter: 'blur(0px)', 
         }}
       />
-      <div className="digital-background-container fixed inset-0 -z-20" />
+      <div className="digital-background-container fixed inset-0 z-10 pointer-events-none" />
     </>
   );
 };
