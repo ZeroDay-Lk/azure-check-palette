@@ -77,18 +77,9 @@ const DigitalBackground = () => {
     // Run animation with higher framerate for smoother effect
     const interval = setInterval(draw, 30);
 
-    // Add more frequent and pronounced glitch effects
+    // Add only occasional glitch effects (removed scan line effects)
     const glitchInterval = setInterval(() => {
-      if (Math.random() > 0.6) { // Increased frequency of glitches
-        // Horizontal line glitch
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.25)'; // More visible glitches
-        ctx.fillRect(
-          0,
-          Math.random() * canvas.height,
-          canvas.width,
-          Math.random() * 5 + 2 // Thicker lines
-        );
-        
+      if (Math.random() > 0.8) { // Less frequent glitches
         // Block glitch
         if (Math.random() > 0.8) {
           ctx.fillStyle = theme === 'dark' ? 'rgba(0, 255, 159, 0.2)' : 'rgba(10, 186, 181, 0.15)';
@@ -100,30 +91,12 @@ const DigitalBackground = () => {
           );
         }
       }
-    }, 800); // More frequent glitches
-
-    // Add scanning line effect
-    const scanLineInterval = setInterval(() => {
-      ctx.fillStyle = theme === 'dark' ? 'rgba(0, 255, 159, 0.2)' : 'rgba(10, 186, 181, 0.2)';
-      let scanPosition = 0;
-      
-      const scanLine = () => {
-        ctx.fillRect(0, scanPosition, canvas.width, 3); // Thicker scan line
-        scanPosition += 5;
-        
-        if (scanPosition < canvas.height) {
-          requestAnimationFrame(scanLine);
-        }
-      };
-      
-      scanLine();
-    }, 3000); // More frequent scan lines
+    }, 1200); // Less frequent glitches
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       clearInterval(interval);
       clearInterval(glitchInterval);
-      clearInterval(scanLineInterval);
     };
   }, [theme]);
 
